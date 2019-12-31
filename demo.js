@@ -23,9 +23,12 @@ let endDate = new Date();
 
 console.log(endDate);
 
-let startDate = moment(endDate).subtract(1, "days").format();
+let startDate = moment(endDate).subtract(NaN - 1, "days").format();
 
-console.log(startDate);
+console.log("1" - 1);
+
+let expirySeconds = moment().hour(0).minute(0).second(0).add(NaN + 1, 'days').diff(moment().hour(0).minute(0).second(0), 'seconds');
+console.log(expirySeconds);
 
 let range = moment(startDate).twix(endDate);
 
@@ -56,3 +59,8 @@ while(itr.hasNext()){
 console.log(output);
 console.log(output.length);
 
+
+let exclusionDate = moment(startDate).add("7"-1, 'days').format();
+console.log(exclusionDate);
+let expiryUnixTimeStamp = moment(exclusionDate).add(1, 'days').hour(23).minute(59).second(59).unix();
+console.log(expiryUnixTimeStamp);
