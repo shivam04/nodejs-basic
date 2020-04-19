@@ -14,6 +14,18 @@ function getStartTimeForRange(currTime, timezoneOffset) {
     return startTime;
 }
 
+function getRangeBetweenDates (startDate, endDate, itrValue, rangeFormat){
+    //console.log(moment(startDate).twix(endDate).length("hours"));
+    let range = moment(startDate).twix(endDate);
+    let itr = range.iterate(itrValue);
+    let output =[];
+    while(itr.hasNext()){
+        let formattedDate = formatDate(itr.next().toDate(), rangeFormat);
+        output.push(formattedDate);
+    }
+    return output
+};
+
 function formatDate(date, format) {
     let momentDate= moment(date);
     return momentDate.utc().format(format);
@@ -45,7 +57,7 @@ while(itr.hasNext()){
 console.log(output);
 console.log(output.length);
 
-startDate = getStartTimeForRange(endDate, "360");
+startDate = getStartTimeForRange(endDate, "-840");
 
 console.log(startDate);
 
@@ -64,3 +76,13 @@ let exclusionDate = moment(startDate).add("7"-1, 'days').format();
 console.log(exclusionDate);
 let expiryUnixTimeStamp = moment(exclusionDate).add(1, 'days').hour(23).minute(59).second(59).unix();
 console.log(expiryUnixTimeStamp);
+
+
+let date = new Date();
+console.log(date);
+let stDateTime = getStartTimeForRange(date, 1440);
+
+console.log(stDateTime);
+
+let rnge = getRangeBetweenDates(startDate, date, 'hours');
+console.log(rnge);
